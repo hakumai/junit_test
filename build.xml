@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="Windows-31J"?>
+
+<project name="foo" default="jar" basedir=".">
+
+ <!-- ソースファイルのディレクトリ -->
+  <property name="build.src" value="src"/>
+
+  <!-- Classファイルを出力するディレクトリ -->
+  <property name="build.dest" value="classes"/>
+
+  <!-- Javadoc を出力するディレクトリ -->
+  <property name="javadoc.dest" value="api"/>
+
+  <!-- プロジェクト名 -->
+  <property name="project" value="foo"/>
+
+  <!-- バージョン番号 -->
+  <property name="version" value="1.0"/>
+
+  <!-- 出力jarファイル -->
+  <property name="buuld.jar" value="${project}-${version}.jar"/>
+
+
+ <!-- jarファイル作成 -->
+  <target name="jar" depends="compile">
+    <jar
+          jarfile="${build.jar}"
+          basedir="${build.dest}">
+    </jar>
+  </target>
+
+
+ <!-- コンパイル実行 -->
+  <target name="compile">
+    <mkdir dir="${build.dest}" />
+    <javac srcdir="${build.src}"
+           debug="${debug}"
+   destdir="${build.dest}"
+    />
+  </target>
+
+
+ <!-- Javadoc作成 -->
+  <target name="javadoc">
+    <javadoc
+      packagenames="*"
+      sourcepath="${build.src}"
+      destdir="${javadoc.dest}">
+    </javadoc>
+  </target>
+
+
+ <!-- ファイルのクリーンアップ -->
+  <target name="clean">
+    <delete dir="${build.dest}" />
+    <delete file="${build.jar}" />
+  </target>
+
+</project>
